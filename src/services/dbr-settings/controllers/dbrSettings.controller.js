@@ -25,23 +25,6 @@ class DBRSettingsController {
     }
   }
 
-  async getLatestSettings(req, res, next) {
-    try {
-      const settings = await dbrSettingsService.getLatestSettings();
-      if (!settings) {
-        return res.status(404).json({
-          success: false,
-          message: 'No DBR settings found'
-        });
-      }
-      res.json({
-        success: true,
-        data: settings
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
 
   async updateSettings(req, res, next) {
     try {

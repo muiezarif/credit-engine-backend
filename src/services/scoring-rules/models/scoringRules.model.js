@@ -39,7 +39,16 @@ const scoringRulesSchema = new mongoose.Schema({
     }],
     avgBankBalance: [rangeSchema],
     estimatedMonthlyIncome: [rangeSchema],
-    spendingToIncomeRatio: [rangeSchema],
+    spendingToIncomeRatio: [{
+        count: {
+            type: Number,
+            required: true
+        },
+        points: {
+            type: Number,
+            required: true
+        }
+    }],
 
 }, {
     timestamps: true

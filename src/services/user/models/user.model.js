@@ -5,13 +5,10 @@ const userSchema = new mongoose.Schema({
   nationalId: {
     type: String,
     required: true,
-    unique: true,
-    trim: true,
   },
   fullName: {
     type: String,
     required: true,
-    trim: true,
   },
   simahScore: {
     type: Number,

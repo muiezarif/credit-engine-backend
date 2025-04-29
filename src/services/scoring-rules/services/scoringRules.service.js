@@ -2,6 +2,7 @@ const ScoringRules = require('../models/scoringRules.model');
 
 class ScoringRulesService {
   async createScoringRules(rulesData) {
+    console.log(rulesData);
     try {
       const rules = new ScoringRules(rulesData);
       return await rules.save();

@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 
 class UserService {
   async createUser(userData) {
+    console.log(userData);
     try {
       const user = new User(userData);
       return await user.save();

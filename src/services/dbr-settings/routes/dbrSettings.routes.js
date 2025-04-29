@@ -8,9 +8,6 @@ router.post('/', dbrSettingsController.createSettings.bind(dbrSettingsController
 // Get all settings
 router.get('/', dbrSettingsController.getAllSettings.bind(dbrSettingsController));
 
-// Get latest settings
-router.get('/latest', dbrSettingsController.getLatestSettings.bind(dbrSettingsController));
-
 // Update settings
 router.put('/:id', dbrSettingsController.updateSettings.bind(dbrSettingsController));
 

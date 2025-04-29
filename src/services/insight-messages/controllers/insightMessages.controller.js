@@ -1,9 +1,9 @@
 const insightMessagesService = require('../services/insightMessages.service');
 
 class InsightMessagesController {
-  async createMessages(req, res, next) {
+  async createInsightMessages(req, res, next) {
     try {
-      const messages = await insightMessagesService.createMessages(req.body);
+      const messages = await insightMessagesService.createInsightMessages(req.body);
       res.status(201).json({
         success: true,
         data: messages
@@ -13,9 +13,9 @@ class InsightMessagesController {
     }
   }
 
-  async getAllMessages(req, res, next) {
+  async getAllInsightMessages(req, res, next) {
     try {
-      const messages = await insightMessagesService.getAllMessages();
+      const messages = await insightMessagesService.getAllInsightMessages();
       res.json({
         success: true,
         data: messages
@@ -25,9 +25,9 @@ class InsightMessagesController {
     }
   }
 
-  async getLatestMessages(req, res, next) {
+  async getLatestInsightMessages(req, res, next) {
     try {
-      const messages = await insightMessagesService.getLatestMessages();
+      const messages = await insightMessagesService.getLatestInsightMessages();
       if (!messages) {
         return res.status(404).json({
           success: false,
@@ -43,9 +43,9 @@ class InsightMessagesController {
     }
   }
 
-  async getMessagesById(req, res, next) {
+  async getInsightMessagesById(req, res, next) {
     try {
-      const messages = await insightMessagesService.getMessagesById(req.params.id);
+      const messages = await insightMessagesService.getInsightMessagesById(req.params.id);
       res.json({
         success: true,
         data: messages
@@ -55,9 +55,10 @@ class InsightMessagesController {
     }
   }
 
-  async updateMessages(req, res, next) {
+  async updateInsightMessages(req, res, next) {
     try {
-      const messages = await insightMessagesService.updateMessages(
+      console.log(req.body.positiveInsights[0].triggerDetails)
+      const messages = await insightMessagesService.updateInsightMessages(
         req.params.id,
         req.body
       );
@@ -70,12 +71,35 @@ class InsightMessagesController {
     }
   }
 
-  async deleteMessages(req, res, next) {
+  async deleteInsightMessages(req, res, next) {
     try {
-      await insightMessagesService.deleteMessages(req.params.id);
+      await insightMessagesService.deleteInsightMessages(req.params.id);
       res.json({
         success: true,
         message: 'Insight messages deleted successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async evaluateUserInsights(req, res, next) {
+    try {
+      const { userData } = req.body;
+      const messages = await insightMessagesService.getLatestInsightMessages();
+      
+      if (!messages) {
+        return res.status(404).json({
+          success: false,
+          message: 'No insight messages configuration found'
+        });
+      }
+
+      const applicableInsights = insightMessagesService.getApplicableInsights(userData, messages);
+      
+      res.json({
+        success: true,
+        data: applicableInsights
       });
     } catch (error) {
       next(error);

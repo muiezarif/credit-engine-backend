@@ -20,17 +20,5 @@ const loanOfferRangesSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Validate minimum is less than maximum
-loanOfferRangesSchema.pre('save', function(next) {
-    const ranges = this.ratingRanges;
-    
-    for (let range of ranges) {
-        if (range.minimumAmount >= range.maximumAmount) {
-            next(new Error('Minimum amount must be less than maximum amount'));
-            return;
-        }
-    }
-    next();
-});
 
 module.exports = mongoose.model('LoanOfferRanges', loanOfferRangesSchema);

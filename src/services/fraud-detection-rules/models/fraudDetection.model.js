@@ -30,17 +30,4 @@ const fraudDetectionSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Validate thresholds are positive numbers
-fraudDetectionSchema.pre('save', function(next) {
-    if (this.maxUnrelatedIncomingTransactions < 0 ||
-        this.maxSuddenDepositMultiple < 0 ||
-        this.minimumAccountAge < 0 ||
-        this.maxAllowedNoExpensePeriod < 0 ||
-        this.highBalanceWithoutActivityThreshold < 0) {
-        next(new Error('All thresholds must be positive numbers'));
-        return;
-    }
-    next();
-});
-
 module.exports = mongoose.model('FraudDetectionRules', fraudDetectionSchema);

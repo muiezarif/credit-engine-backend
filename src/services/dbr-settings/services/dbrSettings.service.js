@@ -14,9 +14,6 @@ class DBRSettingsService {
     return await DBRSettings.find({});
   }
 
-  async getLatestSettings() {
-    return await DBRSettings.findOne().sort({ createdAt: -1 });
-  }
 
   async updateSettings(id, updateData) {
     const settings = await DBRSettings.findByIdAndUpdate(

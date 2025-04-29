@@ -4,14 +4,11 @@ const mongoose = require('mongoose');
 const app = require('./app');
 
 // Set port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8800;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/credit-risk-engine';
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(MONGO_URI)
 .then(() => {
   console.log('MongoDB connected successfully.');
   
