@@ -5,7 +5,7 @@ const app = require('./app');
 
 // Set port
 const PORT = process.env.PORT || 8800;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/credit-risk-engine';
+const MONGO_URI = "mongodb+srv://muiezarif:wallahi1234@credit-risk-engine.7qk0bvk.mongodb.net/?retryWrites=true&w=majority&appName=credit-risk-engine";
 
 // Connect to MongoDB
 mongoose.connect(MONGO_URI)
